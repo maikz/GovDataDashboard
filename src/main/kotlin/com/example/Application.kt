@@ -6,6 +6,10 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 
 fun main() {
+    val departmentList = DepartmentList.create()
+    print("### Department: ")
+    println(departmentList.departments.first().name)
+
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
         .start(wait = true)
 }
