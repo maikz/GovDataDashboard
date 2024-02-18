@@ -1,4 +1,4 @@
-package com.example
+package com.backendChallenge
 
 import com.google.gson.Gson
 import java.io.File

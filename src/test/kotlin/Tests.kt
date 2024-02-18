@@ -1,7 +1,7 @@
-import com.example.Department
-import com.example.DepartmentList
-import com.example.Subordinate
-import com.example.module
+import com.backendChallenge.Department
+import com.backendChallenge.DepartmentList
+import com.backendChallenge.Subordinate
+import com.backendChallenge.module
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*

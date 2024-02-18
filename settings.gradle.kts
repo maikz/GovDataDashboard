@@ -1,1 +1,1 @@
-rootProject.name = "com.example.ktor-sample"
+rootProject.name = "com.mz.backend-challenge"

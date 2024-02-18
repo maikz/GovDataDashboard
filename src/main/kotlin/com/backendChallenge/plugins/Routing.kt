@@ -1,6 +1,6 @@
-package com.example.plugins
+package com.backendChallenge.plugins
 
-import com.example.GovDataFetcher
+import com.backendChallenge.GovDataFetcher
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
