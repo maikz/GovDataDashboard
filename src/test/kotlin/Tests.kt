@@ -3,6 +3,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import kotlin.test.assertTrue
@@ -69,5 +70,16 @@ class ApplicationTest {
         assertTrue(ministryList.ministries.contains(example))
 
         assertEquals(30, ministryList.nameList().count())
+    }
+
+    @Test
+    fun testOrganizationFetching() {
+        runBlocking {
+            var organizations = GovDataFetcher().fetch(includeSubordinates = true)
+            assertEquals(26, organizations.count())
+
+            organizations = GovDataFetcher().fetch(includeSubordinates = false)
+            assertEquals(10, organizations.count())
+        }
     }
 }
