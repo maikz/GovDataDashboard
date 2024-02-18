@@ -21,7 +21,42 @@ class ApplicationTest {
 
         val response = client.get("/")
         assertEquals(HttpStatusCode.OK, response.status)
-        assertEquals("Hello World!", response.bodyAsText())
+        assertEquals("html", response.contentType()?.contentSubtype)
+
+        val body = response.bodyAsText()
+
+        assertTrue(body.contains("Departments by dataset count"))
+
+        val names = listOf("mCLOUD",
+            "Statistisches Bundesamt",
+            "Bundesministerium des Innern und Heimat",
+            "Bundesamt für Justiz",
+            "Bundesministerium für Bildung und Forschung",
+            "Bundesministerium für Arbeit und Soziales",
+            "Bundesministerium für Familie, Senioren, Frauen und Jugend",
+            "Bundesministerium der Finanzen",
+            "Bundesministerium für Wirtschaft und Klimaschutz",
+            "Deutsches Patent- und Markenamt",
+            "Bundesamt für Verbraucherschutz und Lebensmittelsicherheit",
+            "Bundesanstalt für Arbeitsschutz und Arbeitsmedizin",
+            "Bundesministerium für Ernährung und Landwirtschaft",
+            "Bundesinstitut für Bau-, Stadt- und Raumforschung (BBSR) im Bundesamt für Bauwesen und Raumordnung (BBR)",
+            "Auswärtiges Amt",
+            "Generalzolldirektion",
+            "Bundesamt für Wirtschaft und Ausfuhrkontrolle",
+            "Bundesanstalt für Materialforschung und -prüfung (BAM)",
+            "Bundesministerium der Verteidigung",
+            "Bundesministerium für wirtschaftliche Zusammenarbeit und Entwicklung",
+            "Bundesausgleichsamt",
+            "Bundessortenamt",
+            "Bundesverwaltungsamt",
+            "Bundeszentralamt für Steuern",
+            "ITZ-Bund",
+            "Max Rubner-Institut"
+        )
+        for (name in names) {
+            assertTrue(body.contains(name))
+        }
     }
 
     @Test
