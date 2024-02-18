@@ -24,6 +24,7 @@ class ApplicationTest {
 
         val body = response.bodyAsText()
 
+        // Check if we're generally on the page we expect.
         assertTrue(body.contains("Departments by dataset count"))
 
         val names = listOf("mCLOUD",
