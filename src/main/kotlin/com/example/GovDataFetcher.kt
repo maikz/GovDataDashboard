@@ -16,21 +16,31 @@ class GovDataFetcher {
      * Fetches a list of organisations that match those from the departments.json.
      * @return a List of OrganisationResult instances.
      */
-     suspend fun fetch(): List<OrganisationResult> {
+     suspend fun fetch(includeSubordinates: Boolean): List<OrganisationResult> {
         val client = HttpClient(CIO) {
             install(Logging) {
                 level = LogLevel.INFO
             }
         }
 
+        // Get the list of organisations and include the package field because we need toi display it.
         val response: HttpResponse =
             client.get("https://ckan.govdata.de/api/3/action/organization_list?all_fields=True")
         val returnedJSON = Gson().fromJson(response.bodyAsText(), APIResult::class.java)
-        val requiredDepartments = DepartmentList.create()
 
+        // Filter the list of organisations by those we actually want to see (specified in the departments.json).
         return returnedJSON.result
             .filter { organisationResult ->
-                requiredDepartments.departments.any { it.name == organisationResult.display_name }
+                val requiredDepartments = DepartmentList.create()
+                if (includeSubordinates) {
+                    // Get the list of the department names and the subordinate names.
+                    requiredDepartments
+                        .nameList()
+                        .any { it == organisationResult.display_name }
+                } else {
+                    requiredDepartments.departments
+                        .any { it.name == organisationResult.display_name }
+                }
             }
             .sortedByDescending { it.package_count }
     }

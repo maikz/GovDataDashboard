@@ -45,5 +45,7 @@ class ApplicationTest {
             subordinates = listOf(Subordinate(name = "Bundesanstalt für Arbeitsschutz und Arbeitsmedizin "))
         )
         assertTrue(departmentList.departments.contains(example))
+
+        assertEquals(30, departmentList.nameList().count())
     }
 }

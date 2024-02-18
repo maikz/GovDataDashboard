@@ -17,6 +17,17 @@ data class DepartmentList(
             return Gson().fromJson(json, DepartmentList::class.java)
         }
     }
+
+    /**
+     * A flat list of the names of the departments and the names of their subordinates.
+     */
+    fun nameList(): List<String> {
+        return this.departments
+            .flatMap { department ->
+                val subordinateNames = department.subordinates?.map { it.name } ?: emptyList()
+                listOf(department.name) + subordinateNames
+            }
+    }
 }
 
 /**

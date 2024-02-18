@@ -22,7 +22,7 @@ fun Application.configureRouting() {
         staticResources("/content", "mycontent")
 
         get("/") {
-            val organisations = GovDataFetcher().fetch()
+            val organisations = GovDataFetcher().fetch(includeSubordinates = true)
             call.respondHtml(HttpStatusCode.OK) {
                 head {
                     title {
