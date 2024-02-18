@@ -1,7 +1,4 @@
-import com.govdataDashboard.Ministry
-import com.govdataDashboard.MinistryList
-import com.govdataDashboard.Subordinate
-import com.govdataDashboard.module
+import com.govdataDashboard.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
