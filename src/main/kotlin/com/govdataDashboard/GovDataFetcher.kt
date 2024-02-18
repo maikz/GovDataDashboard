@@ -13,6 +13,8 @@ import kotlinx.serialization.json.Json
  */
 class GovDataFetcher {
 
+    private val jsonDecoder = Json { ignoreUnknownKeys = true }
+
     /**
      * Fetches a list of organisations that match those from the departments.json.
      * @param includeSubordinates specifies if subordinate organisations should be included in the returned list.
@@ -28,7 +30,7 @@ class GovDataFetcher {
         // Get the list of organisations and include the package field because we need toi display it.
         val response: HttpResponse =
             client.get("https://ckan.govdata.de/api/3/action/organization_list?all_fields=True")
-        val returnedJSON = Json { ignoreUnknownKeys = true }.decodeFromString<APIResult>(response.bodyAsText())
+        val returnedJSON = this.jsonDecoder.decodeFromString<APIResult>(response.bodyAsText())
 
         // Filter the list of organisations by those we actually want to see (specified in the departments.json).
         return returnedJSON.result
