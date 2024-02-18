@@ -8,24 +8,24 @@ import java.io.File
  * Contains federal ministries and their subordinated agencies.
  * Matches the provided json.
  */
-data class DepartmentList(
-    val departments: List<Department>,
+data class MinistryList(
+    val ministries: List<Ministry>,
 ) {
     companion object Factory {
-        fun create(path: String = "src/main/resources/departments.json"): DepartmentList {
+        fun create(path: String = "src/main/resources/departments.json"): MinistryList {
             val json = File(path).readText()
-            return Gson().fromJson(json, DepartmentList::class.java)
+            return Gson().fromJson(json, MinistryList::class.java)
         }
     }
 
     /**
-     * A flat list of the names of the departments and the names of their subordinates.
+     * A flat list of the ministry names and the names of their subordinates.
      */
     fun nameList(): List<String> {
-        return this.departments
-            .flatMap { department ->
-                val subordinateNames = department.subordinates?.map { it.name } ?: emptyList()
-                listOf(department.name) + subordinateNames
+        return this.ministries
+            .flatMap { ministry ->
+                val subordinateNames = ministry.subordinates?.map { it.name } ?: emptyList()
+                listOf(ministry.name) + subordinateNames
             }
     }
 }
@@ -33,7 +33,7 @@ data class DepartmentList(
 /**
  * A federal ministry
  */
-data class Department(
+data class Ministry(
     val name: String,
     val subordinates: List<Subordinate>?,
 )

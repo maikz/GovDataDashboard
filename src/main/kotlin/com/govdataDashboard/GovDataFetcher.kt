@@ -14,6 +14,7 @@ class GovDataFetcher {
 
     /**
      * Fetches a list of organisations that match those from the departments.json.
+     * @param includeSubordinates specifies if subordinate organisations should be included in the returned list.
      * @return a List of OrganisationResult instances.
      */
      suspend fun fetch(includeSubordinates: Boolean): List<OrganisationResult> {
@@ -31,14 +32,14 @@ class GovDataFetcher {
         // Filter the list of organisations by those we actually want to see (specified in the departments.json).
         return returnedJSON.result
             .filter { organisationResult ->
-                val requiredDepartments = DepartmentList.create()
+                val requiredDepartments = MinistryList.create()
                 if (includeSubordinates) {
                     // Get the list of the department names and the subordinate names.
                     requiredDepartments
                         .nameList()
                         .any { it == organisationResult.display_name }
                 } else {
-                    requiredDepartments.departments
+                    requiredDepartments.ministries
                         .any { it.name == organisationResult.display_name }
                 }
             }
