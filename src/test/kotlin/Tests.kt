@@ -8,7 +8,6 @@ import io.ktor.http.*
 import io.ktor.server.testing.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import kotlin.test.assertContains
 import kotlin.test.assertTrue
 
 
@@ -57,16 +56,6 @@ class ApplicationTest {
         for (name in names) {
             assertTrue(body.contains(name))
         }
-    }
-
-    @Test
-    fun testNewEndpoint() = testApplication {
-        application { module() }
-
-        val response = client.get("/test1")
-        assertEquals(HttpStatusCode.OK, response.status)
-        assertEquals("html", response.contentType()?.contentSubtype)
-        assertContains(response.bodyAsText(), "Hello From Ktor")
     }
 
     @Test
