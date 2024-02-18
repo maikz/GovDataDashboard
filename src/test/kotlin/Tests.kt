@@ -1,7 +1,7 @@
-import com.backendChallenge.Department
-import com.backendChallenge.DepartmentList
-import com.backendChallenge.Subordinate
-import com.backendChallenge.module
+import com.govdataDashboard.Department
+import com.govdataDashboard.DepartmentList
+import com.govdataDashboard.Subordinate
+import com.govdataDashboard.module
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*

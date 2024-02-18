@@ -12,7 +12,7 @@ group = "com.mz"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.backendChallenge.ApplicationKt")
+    mainClass.set("com.govdataDashboard.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")

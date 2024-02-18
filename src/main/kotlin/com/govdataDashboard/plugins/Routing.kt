@@ -1,6 +1,6 @@
-package com.backendChallenge.plugins
+package com.govdataDashboard.plugins
 
-import com.backendChallenge.GovDataFetcher
+import com.govdataDashboard.GovDataFetcher
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*

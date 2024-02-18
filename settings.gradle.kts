@@ -1,1 +1,1 @@
-rootProject.name = "com.mz.backend-challenge"
+rootProject.name = "com.mz.govdata-dashboard"
