@@ -16,11 +16,12 @@ class GovDataFetcher {
     private val jsonDecoder = Json { ignoreUnknownKeys = true }
 
     /**
-     * Fetches a list of organisations that match those from the departments.json.
+     * Fetches a list of organisations that match the federal ministries
+     * from the departments.json ordered by number of packages (datasets).
      * @param includeSubordinates specifies if subordinate organisations should be included in the returned list.
      * @return a List of OrganisationResult instances.
      */
-     suspend fun fetch(includeSubordinates: Boolean): List<OrganisationResult> {
+     suspend fun federalMinistriesByPackageSize(includeSubordinates: Boolean): List<OrganisationResult> {
         val client = HttpClient(CIO) {
             install(Logging) {
                 level = LogLevel.INFO

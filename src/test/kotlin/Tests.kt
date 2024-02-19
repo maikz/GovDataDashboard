@@ -75,10 +75,10 @@ class ApplicationTest {
     @Test
     fun testOrganizationFetching() {
         runBlocking {
-            var organizations = GovDataFetcher().fetch(includeSubordinates = true)
+            var organizations = GovDataFetcher().federalMinistriesByPackageSize(includeSubordinates = true)
             assertEquals(26, organizations.count())
 
-            organizations = GovDataFetcher().fetch(includeSubordinates = false)
+            organizations = GovDataFetcher().federalMinistriesByPackageSize(includeSubordinates = false)
             assertEquals(10, organizations.count())
         }
     }

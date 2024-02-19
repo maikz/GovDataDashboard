@@ -19,7 +19,7 @@ fun Application.configureRouting() {
 
     routing {
         get("/") {
-            val organisations = GovDataFetcher().fetch(includeSubordinates = true)
+            val organisations = GovDataFetcher().federalMinistriesByPackageSize(includeSubordinates = true)
             call.respondHtml(HttpStatusCode.OK) {
                 head {
                     title {
