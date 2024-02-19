@@ -27,7 +27,7 @@ class GovDataFetcher {
      * @return a List of OrganisationResult instances.
      */
      suspend fun federalMinistriesByPackageSize(includeSubordinates: Boolean): List<OrganisationResult> {
-        // Get the list of organisations and include the package field because we need toi display it.
+        // Get the list of organisations and include the package field because we need to display it.
         val response: HttpResponse =
             this.client.get("https://ckan.govdata.de/api/3/action/organization_list?all_fields=True")
         val returnedJSON = this.jsonDecoder.decodeFromString<APIResult>(response.bodyAsText())
@@ -37,11 +37,12 @@ class GovDataFetcher {
             .filter { organisationResult ->
                 val requiredDepartments = MinistryList.create()
                 if (includeSubordinates) {
-                    // Get the list of the department names and the subordinate names.
+                    // Get a list of organisations that are specified in requiredDepartments by name.
                     requiredDepartments
                         .nameList()
                         .any { it == organisationResult.display_name }
                 } else {
+                    // Only get ministries.
                     requiredDepartments.ministries
                         .any { it.name == organisationResult.display_name }
                 }
