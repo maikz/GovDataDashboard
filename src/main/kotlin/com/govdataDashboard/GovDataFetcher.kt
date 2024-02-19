@@ -14,6 +14,11 @@ import kotlinx.serialization.json.Json
 class GovDataFetcher {
 
     private val jsonDecoder = Json { ignoreUnknownKeys = true }
+    private val client = HttpClient(CIO) {
+        install(Logging) {
+            level = LogLevel.INFO
+        }
+    }
 
     /**
      * Fetches a list of organisations that match the federal ministries
@@ -22,15 +27,9 @@ class GovDataFetcher {
      * @return a List of OrganisationResult instances.
      */
      suspend fun federalMinistriesByPackageSize(includeSubordinates: Boolean): List<OrganisationResult> {
-        val client = HttpClient(CIO) {
-            install(Logging) {
-                level = LogLevel.INFO
-            }
-        }
-
         // Get the list of organisations and include the package field because we need toi display it.
         val response: HttpResponse =
-            client.get("https://ckan.govdata.de/api/3/action/organization_list?all_fields=True")
+            this.client.get("https://ckan.govdata.de/api/3/action/organization_list?all_fields=True")
         val returnedJSON = this.jsonDecoder.decodeFromString<APIResult>(response.bodyAsText())
 
         // Filter the list of organisations by those we actually want to see (specified in the departments.json).
