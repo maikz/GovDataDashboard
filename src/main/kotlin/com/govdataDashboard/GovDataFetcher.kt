@@ -53,6 +53,7 @@ class GovDataFetcher {
 
 /**
  * Represents a JSON result from the GovData API call.
+ * Note: This is named kind of generally for now since there is only one API call so far.
  * @property result A list of organisations as JSON objects.
  */
 @Serializable
